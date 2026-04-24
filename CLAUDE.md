@@ -174,6 +174,7 @@ unzip -o /tmp/edo_export.zip -d /tmp/edo_export
 2. 의사결정(스펙 변경·우선순위 조정 등) 발생 시 → `memory/decisions.md`에 날짜·배경·결론 기록
 3. 문의 응대 패턴은 `memory/inquiries.md`에 누적 (같은 문의 반복 방지)
 4. 릴리즈노트/이터레이션 산출물은 `.claude/commands/` 슬래시 커맨드로 생성
+5. **로컬 프로젝트 파일 수정 금지** — `edo/`, `edo-fe/`, `edo_docs/` 및 그 하위 파일(코드·문서 포함)은 절대 편집하지 않음. 읽기(참조)만 허용. 문서 수정은 반드시 Docmost MCP를 통해서만 수행
 
 ---
 
