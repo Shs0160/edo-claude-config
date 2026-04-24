@@ -5,6 +5,64 @@
 
 ---
 
+## GitHub 설정 파일 관리
+
+### "깃 올려줘" 입력 시
+
+아래 순서로 즉시 실행:
+
+```bash
+# 1. auto-memory 최신 내용 동기화
+cp /c/Users/Security365/.claude/projects/C--Users-Security365-edo/memory/*.md /c/Users/Security365/edo/auto-memory/
+
+# 2. 변경사항 스테이징 & 커밋 & 푸시
+cd /c/Users/Security365/edo
+git add .
+git commit -m "chore: 설정 파일 업데이트 $(date '+%Y-%m-%d')"
+git push
+```
+
+커밋 메시지는 변경 내용에 따라 적절히 수정.
+
+### 새 머신에서 세팅하는 방법
+
+1. **저장소 클론** — 빈 폴더 먼저 생성 후 클론
+   ```bash
+   mkdir -p /c/Users/<사용자명>/edo
+   cd /c/Users/<사용자명>/edo
+   git clone https://github.com/Shs0160/edo-claude-config.git .
+   ```
+
+2. **환경변수 설정** — `AZURE_DEVOPS_PAT` 등록 (Windows 시스템 환경변수)
+   - 시스템 속성 → 고급 → 환경 변수 → 사용자 변수에 `AZURE_DEVOPS_PAT` 추가
+
+3. **auto-memory 복원** — auto-memory 파일을 Claude가 읽는 위치로 복사
+   ```bash
+   # 경로의 <사용자명>을 실제 값으로 변경
+   MEMORY_DIR="/c/Users/<사용자명>/.claude/projects/C--Users-<사용자명>-edo/memory"
+   mkdir -p "$MEMORY_DIR"
+   cp /c/Users/<사용자명>/edo/auto-memory/*.md "$MEMORY_DIR/"
+   ```
+   > 경로 인코딩 규칙: `-`는 `-`, `/`는 `-` (예: `C:\Users\foo\edo` → `C--Users-foo-edo`)
+
+4. **코드 저장소 클론** — Azure DevOps에서 별도 클론
+   ```bash
+   cd /c/Users/<사용자명>/edo
+   git clone <azure-devops-url>/edo          # 백엔드
+   git clone <azure-devops-url>/edo-fe       # 프론트엔드
+   git clone <azure-devops-url>/edo_docs     # 문서
+   ```
+
+5. **MCP 서버 설치 확인** — `.mcp.json`의 서버들이 실행 가능한지 확인
+   ```bash
+   # docmost MCP
+   cd /c/Users/<사용자명>/source/repos/mcp-docmost
+   npm install
+   # azure-devops MCP는 npx로 자동 실행됨
+   ```
+
+---
+
 ## 세션 시작 프로토콜 ("시작" 입력 시)
 
 사용자가 "시작"이라고 말하면 아래 순서로 즉시 실행:
